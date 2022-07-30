@@ -1,0 +1,131 @@
+﻿@model AutoPart.Models.Part
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<style>
+    .profileImage {
+        height: 150px;
+        width: 150px;
+        border-radius: 20px;
+    }
+</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Part</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarBrand.CarBrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarBrand.CarBrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Condition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            <img src=@Model.Image class="profileImage" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageSub1)
+        </dt>
+
+        <dd>
+            <img src=@Model.ImageSub1 class="profileImage" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageSub2)
+        </dt>
+
+        <dd>
+            <img src=@Model.Image class="profileImage" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityinStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityinStock)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
