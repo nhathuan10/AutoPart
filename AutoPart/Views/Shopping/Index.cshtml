@@ -5,6 +5,17 @@
     Layout = "~/Views/Shared/LayoutUser2.cshtml";
 }
 
+<style>
+    .item {
+        transition: transform 0.5s;
+    }
+
+        .item:hover {
+            transform: scale(1.03);
+            filter: sepia(25%);
+        }
+</style>
+
 @section Carousel{
     <!-- Carousel wrapper -->
     <div id="carouselMaterialStyle" class="carousel slide carousel-fade container" data-mdb-ride="carousel">
@@ -59,103 +70,36 @@
     <!-- Carousel wrapper -->
 }
 
-<h2>Index</h2>
+<div class="container">
+    <h2>Index</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 item mb-3 d-flex justify-content-center">
+                <div class="card" style="width: 300px">
+                    <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                        <img src=@item.ImageSub2 style="width: 100%;height: 190px"  />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">For: @item.CarName</p>
+                        <p>@item.Supplier.Name</p>
+                        <h4>$@item.UnitPrice</h4>
+                        <a 
+                           href="/Shopping/Details?id=@item.Id&supplier=@item.Supplier.Name&category=@item.Category.Name&manufacturer=@item.Manufacturer.Name&carBrand=@item.CarBrand.CarBrandName" 
+                           type="submit" 
+                           class="btn btn-dark mb-0"
+                        >
+                        View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CarBrand.CarBrandName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Manufacturer.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Supplier.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CarName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Condition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageSub1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageSub2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuantityinStock)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarBrand.CarBrandName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Supplier.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Condition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageSub1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageSub2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityinStock)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>

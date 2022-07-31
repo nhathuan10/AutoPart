@@ -22,13 +22,17 @@ namespace AutoPart.Controllers
         }
 
         // GET: Shopping/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string supplier, string carBrand, string manufacturer, string category)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Part part = db.Parts.Find(id);
+            ViewBag.Supplier = supplier;
+            ViewBag.CarBrand = carBrand;
+            ViewBag.manufacturer = manufacturer;
+            ViewBag.Category = category;
             if (part == null)
             {
                 return HttpNotFound();

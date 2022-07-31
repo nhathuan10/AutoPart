@@ -2,122 +2,92 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
 }
 
 <h2>Details</h2>
 
-<div>
-    <h4>Part</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CarBrand.CarBrandName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CarBrand.CarBrandName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Manufacturer.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Manufacturer.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Supplier.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CarName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CarName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Condition)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageSub1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageSub1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageSub2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageSub2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuantityinStock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuantityinStock)
-        </dd>
-
-    </dl>
+<div class="container bg-light bg-opacity-50">
+    <div class="row mt-4">
+        <div class="col-md-5  d-flex justify-content-center align-items-center">
+            <img src=@Model.ImageSub2 style="height: 275px; width: 85%" />
+        </div>
+        <div class="col-md-7 p-3">
+            <h1 class="fw-bold mb-3 text-dark">@Model.Name</h1>
+            <h2 class="fst-italic fw-bold me-3">$@Model.UnitPrice</h2>
+            <div class="d-flex ">
+                <div style="flex: 1">
+                    <h5>Available:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.QuantityinStock</h5>
+                </div>
+            </div>
+            <div class="d-flex ">
+                <div style="flex: 1">
+                    <h5>Category:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Category</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Used for car brand:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.CarBrand</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Used for car:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.CarName</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Condition:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.Condition</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Manufacturer:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Manufacturer</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Supplier:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Supplier</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Description:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic"> @Html.Raw(HttpUtility.HtmlDecode(@Model.Description))</h5>
+                </div>
+            </div>
+            <form action="/Shopping/AddToCart/" method="post">
+                <input type="hidden" value="@Model.Id" name="Id" />
+                <input type="hidden" value="@Model.Name" name="productName" />
+                <input type="hidden" value="@Model.UnitPrice" name="price" />
+                <input type="hidden" value="@Model.QuantityinStock" name="image" />
+                <label for="quantity" class="me-2 fw-bold">Quantity: </label>
+                <input type="number" id="quantity" name="quantity" min="1" style="width: 120px;border-radius: 5px" value="1"> <br />
+                <input type="submit" value="Add To Cart" class="btn btn-dark mt-3" />
+            </form>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
