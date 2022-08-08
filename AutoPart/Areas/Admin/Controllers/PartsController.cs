@@ -10,6 +10,7 @@ using AutoPart.Models;
 
 namespace AutoPart.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="admin")]
     public class PartsController : Controller
     {
         private MyContext db = new MyContext();
@@ -22,13 +23,17 @@ namespace AutoPart.Areas.Admin.Controllers
         }
 
         // GET: Admin/Parts/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string carBrand, string manufacturer, string supplier, string category)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Part part = db.Parts.Find(id);
+            ViewBag.CarBrand = carBrand;
+            ViewBag.Manufacturer = manufacturer;
+            ViewBag.Supplier = supplier;
+            ViewBag.Category = category;
             if (part == null)
             {
                 return HttpNotFound();

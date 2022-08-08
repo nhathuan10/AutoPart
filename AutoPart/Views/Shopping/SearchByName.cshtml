@@ -1,0 +1,112 @@
+﻿@model IEnumerable<AutoPart.Models.Part>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+}
+
+<style>
+    .item {
+        transition: transform 0.5s;
+    }
+
+        .item:hover {
+            transform: scale(1.03);
+            filter: sepia(25%);
+        }
+</style>
+
+@section Carousel{
+    @Html.Partial("_PartialCarousel")
+}
+
+<div class="container">
+    <h2>Index</h2>
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <div>
+                <a href="/Shopping/Index" class="btn btn-dark me-2">All Products</a>
+            </div>
+            <div class="my-3 me-2">
+                <div class="dropdown">
+                    <a class="btn btn-dark dropdown-toggle"
+                       href="#"
+                       role="button"
+                       id="dropdownMenuLink"
+                       data-mdb-toggle="dropdown"
+                       aria-expanded="false">
+                        Filter By Car Brand
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=3">BMW</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=4">Mescedes-Benz</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=5">Audi</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=6">Lexus</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=7">Acura</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="my-3 me-2">
+                <div class="dropdown">
+                    <a class="btn btn-dark dropdown-toggle"
+                       href="#"
+                       role="button"
+                       id="dropdownMenuLink"
+                       data-mdb-toggle="dropdown"
+                       aria-expanded="false">
+                        Filter By Category
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1003">Cabin Filter</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1004">Axle</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1005">Tyres</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1006">BrakePad</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1007">Ball Joint</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1008">Alternator</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1009">Head Light</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1010">Bumper Cover</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1011">Seat Cover</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1012">Battery</a></li>
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1013">Wheels</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form action="/Shopping/SearchByName/">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input id="search-focus" type="search" id="form1" class="form-control" name="partName" />
+                    <label class="form-label" for="form1">Search By Name</label>
+                </div>
+                <button type="submit" class="btn btn-dark">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 item mb-3 d-flex justify-content-center">
+                <div class="card" style="width: 300px">
+                    <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                        <img src=@item.ImageSub2 style="width: 100%;height: 190px" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><span class="fw-bold">Used For:</span> @item.CarName</p>
+                        <h4>$@item.UnitPrice</h4>
+                        <a href="/Shopping/Details?id=@item.Id&supplier=@item.Supplier.Name&category=@item.Category.Name&manufacturer=@item.Manufacturer.Name&carBrand=@item.CarBrand.CarBrandName"
+                           type="submit"
+                           class="btn btn-dark mb-0">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

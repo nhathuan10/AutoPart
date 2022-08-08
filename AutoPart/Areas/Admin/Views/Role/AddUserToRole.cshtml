@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "AddUserToRole";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Assign User To Role</h2>
+
+<div>
+    @using (Html.BeginForm("AddUserToRole", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Select User: ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("Username", ViewBag.UserName as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+        // SelectList the role type for user
+        <div class="form-group">
+            @Html.Label("Select Role: ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("Name", ViewBag.Name as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+        // End here
+        <div class="form-group" >
+            <input type="submit" class="btn btn-secondary" value=" Assign" style="width: 100px" />
+        </div>
+    }
+</div>

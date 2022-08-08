@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "YourCart";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+}
+
+<style>
+    .qtyBtn {
+        height: 25px;
+        width: 25px;
+        background-color: #9e9e9e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        color: white;
+    }
+</style>
+
+<h2>YourCart</h2>
+
+@{
+    var cart = Session["cart"] as AutoPart.Controllers.ShoppingCart;
+}
+
+<div class="container ">
+    <table class="table table-hover mt-3 rounded-5" style="background-color: #cccccc ">
+        <thead>
+            <tr class="fw-bold fs-5">
+                <td>Image</td>
+                <td>Part Name</td>
+                <td>Description</td>
+                <td>Condition</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Amount</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{float sum = 0; }
+            @if (cart == null)
+            {
+                <h4 class="text-center text-danger">Your cart is empty</h4>
+            }
+            else
+            {
+                for (int i = 0; i < cart.CartItems.Rows.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <img src=@cart.CartItems.Rows[i]["Image"].ToString() style="height: 100px; width: 100px" />
+                        </td>
+                        <td class="fw-bold">@cart.CartItems.Rows[i]["PartName"].ToString()</td>
+                        <td>@Html.Raw(HttpUtility.HtmlDecode(@cart.CartItems.Rows[i]["Description"].ToString()))</td>
+                        <td>@cart.CartItems.Rows[i]["Condition"].ToString()</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a href="/Ordering/ChangeQuantity?partId=@cart.CartItems.Rows[i][0].ToString()&value=minus" class="qtyBtn" type="button" >-</a>
+                                <div class="mx-1">@cart.CartItems.Rows[i]["Quantity"].ToString()</div>
+                                <a href="/Ordering/ChangeQuantity?partId=@cart.CartItems.Rows[i][0].ToString()&value=plus" class="qtyBtn" type="button">+</a>
+                            </div>
+                        </td>
+                        <td>$@cart.CartItems.Rows[i]["Price"].ToString()</td>
+                        <td>
+                            @{
+
+                                var x = int.Parse(@cart.CartItems.Rows[i]["Quantity"].ToString());
+                                var y = float.Parse(@cart.CartItems.Rows[i]["Price"].ToString());
+                                var z = x * y;
+                                sum += z;
+                            }
+                            $@z
+                        </td>
+                        <td>
+                            @Html.ActionLink("Remove", "RemoveItem", "Ordering", new { id = cart.CartItems.Rows[i][0].ToString() }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+        @Html.ActionLink("Place Order", "PlaceOrder", "Shopping", new { @class = "btn btn-dark mr-2" })
+        <h3 class="mt-3 fw-bold" style="margin-right: 100px">Total: $@sum</h3>
+    </div>
+</div>
+
+
+

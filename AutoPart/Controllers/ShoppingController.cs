@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoPart.Models;
+using PagedList;
 
 namespace AutoPart.Controllers
 {
@@ -15,9 +16,72 @@ namespace AutoPart.Controllers
         private MyContext db = new MyContext();
 
         // GET: Shopping
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier);
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).ToList();
+            var finalList = parts.ToPagedList(pageIndex, pageSize);
+            return View(finalList);
+        }
+
+        public ActionResult FilterByCarBrand(int id, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == id).ToList();
+            var finalList = parts.ToPagedList(pageIndex, pageSize);
+            return View(finalList);
+        }
+
+        public ActionResult FilterByCategory(int id, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == id).ToList();
+            var finalList = parts.ToPagedList(pageIndex, pageSize);
+            return View(finalList);
+        }
+
+        public ActionResult Arrange(string arr, int? page)
+        {
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (arr == "name")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.Name);
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                return View(finalList);
+            }
+            else if (arr == "price")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.UnitPrice);
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                return View(finalList);
+            }
+            else
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderByDescending(p => p.UnitPrice);
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                return View(finalList);
+            }
+        }
+
+        public ActionResult SearchByName(string partName)
+        {
+            var parts = from p in db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier) where p.Name.Contains(partName) select p;
             return View(parts.ToList());
         }
 
@@ -29,6 +93,8 @@ namespace AutoPart.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Part part = db.Parts.Find(id);
+            var similarParts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == part.CategoryId);
+            ViewBag.SimilarParts = similarParts.ToList();
             ViewBag.Supplier = supplier;
             ViewBag.CarBrand = carBrand;
             ViewBag.manufacturer = manufacturer;
@@ -40,109 +106,58 @@ namespace AutoPart.Controllers
             return View(part);
         }
 
-        // GET: Shopping/Create
-        public ActionResult Create()
-        {
-            ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "CarBrandName");
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
-            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name");
-            return View();
-        }
-
-        // POST: Shopping/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CarBrandId,SupplierId,ManufacturerId,CategoryId,CarName,UnitPrice,Description,Condition,Image,ImageSub1,ImageSub2,QuantityinStock")] Part part)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Parts.Add(part);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "CarBrandName", part.CarBrandId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", part.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", part.SupplierId);
-            return View(part);
-        }
-
-        // GET: Shopping/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult SimilarPartsByManufacturer(int id, string supplier, string carBrand, string manufacturer, string category)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Part part = db.Parts.Find(id);
-            if (part == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "CarBrandName", part.CarBrandId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", part.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", part.SupplierId);
+            var similarPartsByManufacturer = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.ManufacturerId == part.ManufacturerId && p.CategoryId == part.CategoryId);
+            ViewBag.SimilarPartsByManufacturer = similarPartsByManufacturer.ToList();
+            ViewBag.Supplier = supplier;
+            ViewBag.CarBrand = carBrand;
+            ViewBag.Manufacturer = manufacturer;
+            ViewBag.Category = category;
             return View(part);
         }
 
-        // POST: Shopping/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CarBrandId,SupplierId,ManufacturerId,CategoryId,CarName,UnitPrice,Description,Condition,Image,ImageSub1,ImageSub2,QuantityinStock")] Part part)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(part).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "CarBrandName", part.CarBrandId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", part.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", part.SupplierId);
-            return View(part);
-        }
-
-        // GET: Shopping/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult SimilarPartsByCarBrand(int id, string supplier, string carBrand, string manufacturer, string category)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Part part = db.Parts.Find(id);
-            if (part == null)
-            {
-                return HttpNotFound();
-            }
+            var similarPartsByCarBrand = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == part.CarBrandId && p.CategoryId == part.CategoryId);
+            ViewBag.SimilarPartsByCarBrand = similarPartsByCarBrand.ToList();
+            ViewBag.Supplier = supplier;
+            ViewBag.CarBrand = carBrand;
+            ViewBag.Manufacturer = manufacturer;
+            ViewBag.Category = category;
             return View(part);
         }
 
-        // POST: Shopping/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Compare(int basePartId, string basePartSupplier, string basePartCarBrand, string basePartManufacturer, string basePartCategory, int id, string supplier, string carBrand, string manufacturer, string category)
         {
-            Part part = db.Parts.Find(id);
-            db.Parts.Remove(part);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            if (id == null && basePartId == null)
             {
-                db.Dispose();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            base.Dispose(disposing);
+            var basePart = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).FirstOrDefault(p => p.Id == basePartId);
+            ViewBag.BasePartSupplier = basePartSupplier;
+            ViewBag.BasePartCarBrand = basePartCarBrand;
+            ViewBag.BasePartManufacturer = basePartManufacturer;
+            ViewBag.BasePartCategory = basePartCategory;
+            var similarParts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == basePart.CategoryId);
+            ViewBag.SimilarParts = similarParts.ToList();
+            var part = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).FirstOrDefault(p => p.Id == id);
+            ViewBag.Part = part;
+            ViewBag.Supplier = supplier;
+            ViewBag.CarBrand = carBrand;
+            ViewBag.Manufacturer = manufacturer;
+            ViewBag.Category = category;
+            return View(basePart);
         }
     }
 }

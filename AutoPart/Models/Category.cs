@@ -11,7 +11,7 @@ namespace AutoPart.Models
         [Display(Name = "Category Id")]
         public int Id { get; set; }
 
-        [Display(Name = "Product Category")]
+        [Display(Name = "Category")]
         [Required(ErrorMessage = "Must not be empty")]
         public string Name { get; set; }
 

@@ -46,7 +46,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.2022.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -111,6 +120,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="X.PagedList, Version=8.4.3.0, Culture=neutral, PublicKeyToken=525ccaa9023f010c, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.8.4.3\lib\netstandard2.0\X.PagedList.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -173,28 +185,31 @@
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManufacturersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PartsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderingController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207270338008_first.cs" />
-    <Compile Include="Migrations\202207270338008_first.designer.cs">
-      <DependentUpon>202207270338008_first.cs</DependentUpon>
+    <Compile Include="Migrations\202208060716039_asd.cs" />
+    <Compile Include="Migrations\202208060716039_asd.designer.cs">
+      <DependentUpon>202208060716039_asd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207280347214_m2.cs" />
-    <Compile Include="Migrations\202207280347214_m2.designer.cs">
-      <DependentUpon>202207280347214_m2.cs</DependentUpon>
+    <Compile Include="Migrations\202208061132548_sec.cs" />
+    <Compile Include="Migrations\202208061132548_sec.designer.cs">
+      <DependentUpon>202208061132548_sec.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207280810097_m3.cs" />
-    <Compile Include="Migrations\202207280810097_m3.designer.cs">
-      <DependentUpon>202207280810097_m3.cs</DependentUpon>
+    <Compile Include="Migrations\202208061445473_third.cs" />
+    <Compile Include="Migrations\202208061445473_third.designer.cs">
+      <DependentUpon>202208061445473_third.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -204,6 +219,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -1230,11 +1246,15 @@
     <Content Include="Content\adminlte.min.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap2.css" />
+    <Content Include="Content\css2\bootstrap.css" />
+    <Content Include="Content\css2\style.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\flaticon.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
@@ -1242,11 +1262,11 @@
     <Content Include="Content\mdb.min.css" />
     <Content Include="Content\nice-select.css" />
     <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\simpleLightbox.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\style2.css" />
-    <Content Include="Content\themify-icons.css" />
+    <Content Include="Content\tempusdominus-bootstrap-4.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\Flaticon.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -1254,6 +1274,7 @@
     <Content Include="fonts\themify.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\about.jpg" />
     <Content Include="img\admin_logo.jpg" />
     <Content Include="img\admin_avatar.jpg" />
     <Content Include="img\b1.jpg" />
@@ -1289,6 +1310,10 @@
     <Content Include="img\blog\post-img2.jpg" />
     <Content Include="img\blog\prev.jpg" />
     <Content Include="img\breadcrumb\checkout-bg.jpg" />
+    <Content Include="img\carousel-1.png" />
+    <Content Include="img\carousel-2.png" />
+    <Content Include="img\carousel-bg-1.jpg" />
+    <Content Include="img\carousel-bg-2.jpg" />
     <Content Include="img\crs1.jpg" />
     <Content Include="img\crs2.jpg" />
     <Content Include="img\crs3.jpg" />
@@ -1320,6 +1345,7 @@
     <Content Include="img\elements\user1.png" />
     <Content Include="img\elements\user2.png" />
     <Content Include="img\fevicon.png" />
+    <Content Include="img\Front.jpg" />
     <Content Include="img\instagram\i1.jpg" />
     <Content Include="img\instagram\i2.jpg" />
     <Content Include="img\instagram\i3.jpg" />
@@ -1375,6 +1401,18 @@
     <Content Include="img\product\single-product\s-product-s-2.jpg" />
     <Content Include="img\product\single-product\s-product-s-3.jpg" />
     <Content Include="img\product\single-product\s-product-s-4.jpg" />
+    <Content Include="img\service-1.jpg" />
+    <Content Include="img\service-2.jpg" />
+    <Content Include="img\service-3.jpg" />
+    <Content Include="img\service-4.jpg" />
+    <Content Include="img\team-1.jpg" />
+    <Content Include="img\team-2.jpg" />
+    <Content Include="img\team-3.jpg" />
+    <Content Include="img\team-4.jpg" />
+    <Content Include="img\testimonial-1.jpg" />
+    <Content Include="img\testimonial-2.jpg" />
+    <Content Include="img\testimonial-3.jpg" />
+    <Content Include="img\testimonial-4.jpg" />
     <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1386,6 +1424,8 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Scripts\counterup.min.js" />
+    <Content Include="Scripts\easing.min.js" />
     <Content Include="Scripts\imagesloaded.pkgd.min.js" />
     <Content Include="Scripts\isotope-min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -1393,13 +1433,25 @@
     <Content Include="Scripts\jquery.counterup.js" />
     <Content Include="Scripts\jquery.nice-select.min.js" />
     <Content Include="Scripts\jquery.waypoints.min.js" />
+    <Content Include="Scripts\js2\bootstrap.min.js" />
+    <Content Include="Scripts\js2\google-map.js" />
+    <Content Include="Scripts\js2\jquery.min.js" />
+    <Content Include="Scripts\js2\jquery.validate.min.js" />
+    <Content Include="Scripts\js2\main.js" />
+    <Content Include="Scripts\js2\popper.js" />
     <Content Include="Scripts\mail-script.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\mdb.min.js" />
+    <Content Include="Scripts\moment-timezone.min.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\simpleLightbox.min.js" />
     <Content Include="Scripts\stellar.js" />
+    <Content Include="Scripts\tempusdominus-bootstrap-4.min.js" />
     <Content Include="Scripts\theme.js" />
+    <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Scripts\wow.min.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -1473,6 +1525,15 @@
     <Content Include="fonts\themify.eot" />
     <Content Include="fonts\themify.ttf" />
     <Content Include="fonts\themify.woff" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\AddUserToRole.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\AssigningConfirmed.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1539,6 +1600,19 @@
     <Content Include="Views\Shopping\Edit.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
     <Content Include="Views\Shared\LayoutUser2.cshtml" />
+    <Content Include="Views\Shopping\similarPartsByManufacturer.cshtml" />
+    <Content Include="Views\Shopping\SimilarPartsByCarBrand.cshtml" />
+    <Content Include="Views\Shared\_PartialCarousel.cshtml" />
+    <Content Include="Views\Shopping\FilterByCarBrand.cshtml" />
+    <Content Include="Views\Shopping\FilterByCategory.cshtml" />
+    <Content Include="Views\Shopping\SearchByName.cshtml" />
+    <Content Include="Views\Shared\_PartialSearchBarList.cshtml" />
+    <Content Include="Views\Shopping\Arrange.cshtml" />
+    <Content Include="Views\Shopping\Compare.cshtml" />
+    <Content Include="Views\Ordering\YourCart.cshtml" />
+    <Content Include="Views\Shared\HomeLayout.cshtml" />
+    <Content Include="Views\Shared\ContactLayout.cshtml" />
+    <Content Include="Scripts\js2\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1560,14 +1634,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207270338008_first.resx">
-      <DependentUpon>202207270338008_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202208060716039_asd.resx">
+      <DependentUpon>202208060716039_asd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207280347214_m2.resx">
-      <DependentUpon>202207280347214_m2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202208061132548_sec.resx">
+      <DependentUpon>202208061132548_sec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207280810097_m3.resx">
-      <DependentUpon>202207280810097_m3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202208061445473_third.resx">
+      <DependentUpon>202208061445473_third.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

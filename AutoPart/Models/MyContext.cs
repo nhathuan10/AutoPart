@@ -19,5 +19,6 @@ namespace AutoPart.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

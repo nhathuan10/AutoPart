@@ -1,0 +1,158 @@
+﻿@model AutoPart.Models.Part
+@{
+    ViewBag.Title = "SimilarPartsByManufacturer";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+}
+
+<h2>similarPartsByManufacturer</h2>
+
+<style>
+    .sub-item:hover {
+        border: 2px #202020 solid;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<h2>Details</h2>
+
+<div class="container bg-light bg-opacity-50" style="height: 150vh">
+    <div class="row mt-4">
+        <div class="col-md-5 d-flex flex-column justify-content-center align-items-center" style="background-color: #cccccc">
+            <div class="bg-image hover-zoom rounded">
+                <img src=@Model.ImageSub2 id="big-img" style="height: 400px; width: 400px" />
+            </div>
+            <div class="row mt-4">
+                <div class="small-img bg-image rounded hover-zoom col-md-4 d-flex justify-content-end pe-2">
+                    <img src=@Model.Image style="width: 100px; height: 100px" />
+                </div>
+                <div class="small-img bg-image rounded hover-zoom col-md-4 d-flex justify-content-start ps-2">
+                    <img src=@Model.ImageSub1 style="width: 100px; height: 100px" />
+                </div>
+                <div class="small-img bg-image rounded hover-zoom col-md-4 d-flex justify-content-start ps-2">
+                    <img src=@Model.ImageSub2 style="width: 100px; height: 100px" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 p-3">
+            <h1 class="fw-bold mb-3 text-dark">@Model.Name</h1>
+            <h2 class="fst-italic fw-bold me-3">$@Model.UnitPrice</h2>
+            <div class="d-flex ">
+                <div style="flex: 1">
+                    <h5>Available:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.QuantityinStock</h5>
+                </div>
+            </div>
+            <div class="d-flex ">
+                <div style="flex: 1">
+                    <h5>Type:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Category</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Used for car brand:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.CarBrand</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Used for car:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.CarName</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Condition:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@Model.Condition</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Manufacturer:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Manufacturer</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Supplier:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic">@ViewBag.Supplier</h5>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="flex: 1">
+                    <h5>Description:</h5>
+                </div>
+                <div style="flex: 2">
+                    <h5 class="fw-light fst-italic"> @Html.Raw(HttpUtility.HtmlDecode(@Model.Description))</h5>
+                </div>
+            </div>
+            <form action="/Shopping/AddToCart/" method="post">
+                <input type="hidden" value="@Model.Id" name="Id" />
+                <input type="hidden" value="@Model.Name" name="productName" />
+                <input type="hidden" value="@Model.UnitPrice" name="price" />
+                <input type="hidden" value="@Model.QuantityinStock" name="image" />
+                <label for="quantity" class="me-2 fw-bold">Quantity: </label>
+                <input type="number" id="quantity" name="quantity" min="1" style="width: 120px;border-radius: 5px" value="1"> <br />
+                <input type="submit" value="Add To Cart" class="btn btn-dark mt-3" />
+            </form>
+        </div>
+    </div>
+
+    <h1 class="text-center my-4">Similar Products</h1>
+    <div class="my-3">
+        <a href="/Shopping/Details?id=@Model.Id&supplier=@Model.Supplier.Name&category=@Model.Category.Name&manufacturer=@Model.Manufacturer.Name&carBrand=@Model.CarBrand.CarBrandName" class="btn btn-dark">By Category</a>
+        <a href="/Shopping/SimilarPartsByManufacturer?id=@Model.Id&supplier=@Model.Supplier.Name&category=@Model.Category.Name&manufacturer=@Model.Manufacturer.Name&carBrand=@Model.CarBrand.CarBrandName" class="btn btn-dark">By Manufacturer</a>
+        <a href="/Shopping/SimilarPartsByCarBrand?id=@Model.Id&supplier=@Model.Supplier.Name&category=@Model.Category.Name&manufacturer=@Model.Manufacturer.Name&carBrand=@Model.CarBrand.CarBrandName" class="btn btn-dark">By Car Brand</a>
+    </div>
+
+    <div class="row">
+        @foreach (var item in ViewBag.SimilarPartsByManufacturer)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 item mb-3 d-flex justify-content-center">
+                <a href="@Url.Action("Details", "Shopping", new {
+                            id = item.Id,
+                            carBrand = item.CarBrand.CarBrandName,
+                            category = item.Category.Name,
+                            manufacturer = item.Manufacturer.Name,
+                            supplier = item.Supplier.Name })">
+                    <div class="card shadow sub-item" style="border-radius: 10px">
+                        <img src=@item.ImageSub2 class="card-img-top" alt="..." style="width: 100%;height: 190px">
+                        <div class="card-body">
+                            <h5 class="text-bold product-name">@item.Name</h5>
+                            <p class="text-dark"><b>Type: </b> <span class="font-italic">@item.Category.Name</span></p>
+                            <p class="text-dark"><b>Manufacturer: </b> <span class="font-italic">@item.Manufacturer.Name</span></p>
+                            <p class="text-dark"><b>Price: </b> <span class="font-italic">$@item.UnitPrice</span></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".small-img").click(function () {
+            $("#big-img").hide();
+            var imgUrl = $(this).find("img").attr("src");
+            $("#big-img").attr("src", imgUrl);
+            $("#big-img").fadeIn(500);
+        })
+    })
+</script>
+

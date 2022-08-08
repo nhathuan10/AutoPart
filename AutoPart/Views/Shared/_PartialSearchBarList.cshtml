@@ -1,0 +1,78 @@
+﻿<div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+        <div>
+            <a href="/Shopping/Index" class="btn btn-dark me-2">All Products</a>
+        </div>
+        <div class="my-3 me-2">
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle"
+                   href="#"
+                   role="button"
+                   id="dropdownMenuLink"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    Filter By Car Brand
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=3">BMW</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=4">Mescedes-Benz</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=5">Audi</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=6">Lexus</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=7">Acura</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="my-3 me-2">
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle"
+                   href="#"
+                   role="button"
+                   id="dropdownMenuLink"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    Filter By Category
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1003">Cabin Filter</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1004">Axle</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1005">Tyres</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1006">BrakePad</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1007">Ball Joint</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1008">Alternator</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1009">Head Light</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1010">Bumper Cover</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1012">Battery</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1013">Wheels</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="my-3 me-2">
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle"
+                   href="#"
+                   role="button"
+                   id="dropdownMenuLink"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    Arrange By
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/Shopping/Arrange?arr=name">Name</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/Arrange?arr=price">Price From Low To High</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/Arrange?arr=priceDescend">Price Form High To Low</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <form action="/Shopping/SearchByName/">
+        <div class="input-group">
+            <div class="form-outline">
+                <input id="search-focus" type="search" id="form1" class="form-control" name="partName" />
+                <label class="form-label" for="form1">Search By Name</label>
+            </div>
+            <button type="submit" class="btn btn-dark">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
