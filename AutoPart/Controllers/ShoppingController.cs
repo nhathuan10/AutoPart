@@ -32,10 +32,15 @@ namespace AutoPart.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int pageSize = 5;
+            int pageSize = 4;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == id).ToList();
+            ViewBag.CarBrandId = id;
+            foreach (var part in parts)
+            {
+                ViewBag.CarBrand = part.CarBrand.CarBrandName;
+            }
             var finalList = parts.ToPagedList(pageIndex, pageSize);
             return View(finalList);
         }
@@ -46,43 +51,165 @@ namespace AutoPart.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int pageSize = 5;
+            int pageSize = 4;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == id).ToList();
+            ViewBag.CategoryId = id;
+            foreach (var part in parts)
+            {
+                ViewBag.Category = part.Category.Name;
+            }
             var finalList = parts.ToPagedList(pageIndex, pageSize);
             return View(finalList);
         }
 
         public ActionResult Arrange(string arr, int? page)
         {
-            int pageSize = 5;
+            int pageSize = 4;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             if (arr == "name")
             {
-                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.Name);
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.Name).ToList();
                 var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Name By Alphabet";
+                ViewBag.Action = arr;
                 return View(finalList);
             }
             else if (arr == "price")
             {
-                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.UnitPrice);
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderBy(p => p.UnitPrice).ToList();
                 var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From Low To High";
+                ViewBag.Action = arr;
                 return View(finalList);
             }
             else
             {
-                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderByDescending(p => p.UnitPrice);
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).OrderByDescending(p => p.UnitPrice).ToList();
                 var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From High To Low";
+                ViewBag.Action = arr;
                 return View(finalList);
             }
         }
 
-        public ActionResult SearchByName(string partName)
+        public ActionResult ArrangeByCarBrand(string arr, int? page, int carBrandId)
         {
+            int pageSize = 4;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (arr == "name")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == carBrandId).OrderBy(p => p.Name).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Name By Alphabet";
+                ViewBag.Action = arr;
+                ViewBag.CarBrandId = carBrandId;
+                return View(finalList);
+            }
+            else if (arr == "price")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == carBrandId).OrderBy(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From Low To High";
+                ViewBag.Action = arr;
+                ViewBag.CarBrandId = carBrandId;
+                return View(finalList);
+            }
+            else
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CarBrandId == carBrandId).OrderByDescending(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From High To Low";
+                ViewBag.Action = arr;
+                ViewBag.CarBrandId = carBrandId;
+                return View(finalList);
+            }
+        }
+
+        public ActionResult ArrangeByCategory(string arr, int? page, int categoryId)
+        {
+            int pageSize = 4;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (arr == "name")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == categoryId).OrderBy(p => p.Name).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Name By Alphabet";
+                ViewBag.Action = arr;
+                ViewBag.CategoryId = categoryId;
+                return View(finalList);
+            }
+            else if (arr == "price")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == categoryId).OrderBy(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From Low To High";
+                ViewBag.Action = arr;
+                ViewBag.CategoryId = categoryId;
+                return View(finalList);
+            }
+            else
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From High To Low";
+                ViewBag.Action = arr;
+                ViewBag.CategoryId = categoryId;
+                return View(finalList);
+            }
+        }
+
+        public ActionResult SearchByName(string partName, int? page)
+        {
+            int pageSize = 4;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var parts = from p in db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier) where p.Name.Contains(partName) select p;
-            return View(parts.ToList());
+            var finalList = parts.ToList().ToPagedList(pageIndex, pageSize); ;
+            foreach (var part in parts)
+            {
+                ViewBag.PartCategory = part.Category.Name;
+            }
+            ViewBag.PartName = partName;
+            return View(finalList);
+        }
+
+        public ActionResult ArrangeByName(string arr, int? page, string partName)
+        {
+            int pageSize = 4;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (arr == "name")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.Name.Contains(partName)).OrderBy(p => p.Name).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Name By Alphabet";
+                ViewBag.Action = arr;
+                ViewBag.PartName = partName;
+                return View(finalList);
+            }
+            else if (arr == "price")
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.Name.Contains(partName)).OrderBy(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From Low To High";
+                ViewBag.Action = arr;
+                ViewBag.PartName = partName;
+                return View(finalList);
+            }
+            else
+            {
+                var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).Where(p => p.Name.Contains(partName)).OrderByDescending(p => p.UnitPrice).ToList();
+                var finalList = parts.ToPagedList(pageIndex, pageSize);
+                ViewBag.ArrangeType = "Price From High To Low";
+                ViewBag.Action = arr;
+                ViewBag.PartName = partName;
+                return View(finalList);
+            }
         }
 
         // GET: Shopping/Details/5

@@ -28,7 +28,8 @@ namespace AutoPart.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            //Order order = db.Orders.Find(id);
+            var order = db.Orders.Include(p => p.Customer).FirstOrDefault();
             if (order == null)
             {
                 return HttpNotFound();

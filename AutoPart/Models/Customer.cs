@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,6 +11,11 @@ namespace AutoPart.Models
     {
         [Display(Name = "Customer Id")]
         public int Id { get; set; }
+        /* [Key]
+         [ForeignKey("ApplicationUser")]
+         public string UserId { get; set; }*/
+        [Required(ErrorMessage = "Must not be empty")]
+        public string Account { get; set; }
 
         [Display(Name = "Customer Name")]
         [Required(ErrorMessage = "Must not be empty")]
@@ -36,5 +42,6 @@ namespace AutoPart.Models
         [Required(ErrorMessage = "Must not be empty")]
         public string Phone { get; set; }
         public ICollection<Order> Orders { get; set; }
+        //public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

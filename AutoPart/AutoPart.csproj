@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderingController.cs" />
+    <Compile Include="Controllers\OrderManagingController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,6 +211,18 @@
     <Compile Include="Migrations\202208061445473_third.cs" />
     <Compile Include="Migrations\202208061445473_third.designer.cs">
       <DependentUpon>202208061445473_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208080344402_fourth.cs" />
+    <Compile Include="Migrations\202208080344402_fourth.designer.cs">
+      <DependentUpon>202208080344402_fourth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208080409013_fifth.cs" />
+    <Compile Include="Migrations\202208080409013_fifth.designer.cs">
+      <DependentUpon>202208080409013_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100353308_sixth.cs" />
+    <Compile Include="Migrations\202208100353308_sixth.designer.cs">
+      <DependentUpon>202208100353308_sixth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1317,6 +1330,9 @@
     <Content Include="img\crs1.jpg" />
     <Content Include="img\crs2.jpg" />
     <Content Include="img\crs3.jpg" />
+    <Content Include="img\crs4.jpg" />
+    <Content Include="img\crs5.jpg" />
+    <Content Include="img\crs6.jpg" />
     <Content Include="img\elements\a.jpg" />
     <Content Include="img\elements\a2.jpg" />
     <Content Include="img\elements\d.jpg" />
@@ -1613,6 +1629,15 @@
     <Content Include="Views\Shared\HomeLayout.cshtml" />
     <Content Include="Views\Shared\ContactLayout.cshtml" />
     <Content Include="Scripts\js2\.DS_Store" />
+    <Content Include="Views\Ordering\PlaceOrder.cshtml" />
+    <Content Include="Views\Ordering\PlaceOrderConfirmed.cshtml" />
+    <Content Include="Views\OrderManaging\Index.cshtml" />
+    <Content Include="Views\OrderManaging\ViewOrder.cshtml" />
+    <Content Include="Views\OrderManaging\ViewOrderDetail.cshtml" />
+    <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\Shopping\ArrangeByCarBrand.cshtml" />
+    <Content Include="Views\Shopping\ArrangeByCategory.cshtml" />
+    <Content Include="Views\Shopping\ArrangeByName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1642,6 +1667,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208061445473_third.resx">
       <DependentUpon>202208061445473_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208080344402_fourth.resx">
+      <DependentUpon>202208080344402_fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208080409013_fifth.resx">
+      <DependentUpon>202208080409013_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100353308_sixth.resx">
+      <DependentUpon>202208100353308_sixth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

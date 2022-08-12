@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AutoPart.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ViewOrdeDetail";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+}
+
+<style>
+    .v {
+        min-height: 100vh;
+    }
+    .footerr {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<h2 class="text-center fw-bold my-3">View Order Details</h2>
+
+<div class="container v">
+    <table class="table table-hover table-secondary">
+        <tr class="fs-5">
+            <th>
+                @Html.DisplayNameFor(model => model.Order.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Part.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Part.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+            </tr>
+        }
+    </table>
+    <h2 class="fw-bold text-end text-warming">Total: $@ViewBag.Amount</h2>
+    @Html.Partial("_PartialFooter")
+</div>

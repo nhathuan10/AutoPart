@@ -24,8 +24,28 @@
 }
 
 <div class="container">
-    <h2>Index</h2>
     @Html.Partial("_PartialSearchBarList")
+    <input value="@ViewBag.CarBrandId" type="hidden" />
+    <div class="d-flex align-items-center py-2 my-2 justify-content-between">
+        <h2>Parts For @ViewBag.CarBrand Car</h2>
+        <div>
+            <div class="dropdown">
+                <a class="btn btn-success dropdown-toggle"
+                   href="#"
+                   role="button"
+                   id="dropdownMenuLink"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    Arrange By
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/Shopping/ArrangeByCarBrand?arr=name&carBrandId=@ViewBag.CarBrandId">Name</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/ArrangeByCarBrand?arr=price&carBrandId=@ViewBag.CarBrandId">Price From Low To High</a></li>
+                    <li><a class="dropdown-item" href="/Shopping/ArrangeByCarBrand?arr=priceDescend&carBrandId=@ViewBag.CarBrandId">Price From High To Low</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="row">
         @foreach (var item in Model)
         {
@@ -52,6 +72,6 @@
         }
     </div>
     <div class="d-flex justify-content-center">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = "&Uacute;  Last>>" })
+        @Html.PagedListPager(Model, page => Url.Action("FilterByCarBrand", new { page, id = ViewBag.CarBrandId }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = "&Uacute;  Last>>" })
     </div>
 </div>

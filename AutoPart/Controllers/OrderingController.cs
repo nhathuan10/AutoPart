@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Net;
 using AutoPart.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AutoPart.Controllers
 {
@@ -169,6 +171,64 @@ namespace AutoPart.Controllers
             }
             cart.ChangeQuantity(partId, value);
             return RedirectToAction("YourCart");
+        }
+
+        [Authorize(Roles = "user")]
+        public ActionResult PlaceOrder(float sum)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+            string userName = currentUser.Email;
+            string userId = currentUser.Id;
+            ViewBag.UserName = userName;
+            ViewBag.UserId = userId;
+            ViewBag.Sum = sum;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PlaceOrder([Bind(Include = "Id,Account,Name,Address,City,State,Email,Phone")] Customer customer, float sum)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                return RedirectToAction("PlaceOrderConfirmed", new { sum = sum });
+            }
+            return View(customer);
+        }
+        public ActionResult PlaceOrderConfirmed(float sum)
+        {
+            var cart = (ShoppingCart)Session["cart"];
+            if (cart != null)
+            {
+                var items = cart.CartItems;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+                var customer = db.Customers.Where(c => c.Account == currentUser.Id).ToList().LastOrDefault();
+                Order order = new Order();
+                order.CustomerId = customer.Id;
+                order.OrderDate = DateTime.Today;
+                order.Amount = sum;
+                db.Orders.Add(order);
+                db.SaveChanges();
+
+                int orderId = order.Id;
+                for (int i = 0; i < items.Rows.Count; i++)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.OrderId = orderId;
+                    orderDetail.PartId = int.Parse(items.Rows[i]["PartID"].ToString());
+                    orderDetail.Quantity = int.Parse(items.Rows[i]["Quantity"].ToString());
+                    orderDetail.UnitPrice = int.Parse(items.Rows[i]["Price"].ToString());
+                    db.OrderDetails.Add(orderDetail);
+                }
+                db.SaveChanges();
+                Session["cart"] = null;
+            }
+            return View();
         }
     }
 }

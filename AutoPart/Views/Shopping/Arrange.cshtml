@@ -24,8 +24,9 @@
 }
 
 <div class="container">
-    <h2>Index</h2>
     @Html.Partial("_PartialSearchBarList")
+    <h2 class="mb-3">@ViewBag.ArrangeType</h2>
+    <input value="@ViewBag.Action" type="hidden" />
     <div class="row">
         @foreach (var item in Model)
         {
@@ -52,6 +53,6 @@
         }
     </div>
     <div class="d-flex justify-content-center">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = "&Uacute;  Last>>" })
+        @Html.PagedListPager(Model, page => Url.Action("Arrange", new { page, arr = ViewBag.Action }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = "&Uacute;  Last>>" })
     </div>
 </div>
