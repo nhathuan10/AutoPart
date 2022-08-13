@@ -7,7 +7,7 @@
 
 <style>
     .v {
-        min-height: 100vh;
+        height: 120vh;
     }
 
     .footerr {
@@ -17,9 +17,11 @@
     }
 </style>
 
-<h2 class="text-center fw-bold my-3">Orders Placed By Customers</h2>
-
 <div class="container v">
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <h2 class="fw-bold">Orders Placed By Customers</h2>
+        <a href="/OrderManaging/CreateCustomer" class="btn btn-default">+ Create New Customer</a>
+    </div>
     <table class="table table-striped" id="customers">
         <thead>
             <tr class="fs-5">
@@ -41,6 +43,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Phone)
                 </th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -68,6 +71,9 @@
                     </td>
                     <td>
                         @Html.ActionLink("View Order", "ViewOrder", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit Info", "EditCustomer", new { id = item.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }

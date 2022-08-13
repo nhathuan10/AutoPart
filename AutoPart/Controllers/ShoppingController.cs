@@ -18,7 +18,7 @@ namespace AutoPart.Controllers
         // GET: Shopping
         public ActionResult Index(int? page)
         {
-            int pageSize = 5;
+            int pageSize = 8;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var parts = db.Parts.Include(p => p.CarBrand).Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Supplier).ToList();

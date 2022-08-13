@@ -200,29 +200,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202208060716039_asd.cs" />
-    <Compile Include="Migrations\202208060716039_asd.designer.cs">
-      <DependentUpon>202208060716039_asd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208061132548_sec.cs" />
-    <Compile Include="Migrations\202208061132548_sec.designer.cs">
-      <DependentUpon>202208061132548_sec.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208061445473_third.cs" />
-    <Compile Include="Migrations\202208061445473_third.designer.cs">
-      <DependentUpon>202208061445473_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208080344402_fourth.cs" />
-    <Compile Include="Migrations\202208080344402_fourth.designer.cs">
-      <DependentUpon>202208080344402_fourth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208080409013_fifth.cs" />
-    <Compile Include="Migrations\202208080409013_fifth.designer.cs">
-      <DependentUpon>202208080409013_fifth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208100353308_sixth.cs" />
-    <Compile Include="Migrations\202208100353308_sixth.designer.cs">
-      <DependentUpon>202208100353308_sixth.cs</DependentUpon>
+    <Compile Include="Migrations\202208130301076_first.cs" />
+    <Compile Include="Migrations\202208130301076_first.designer.cs">
+      <DependentUpon>202208130301076_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1380,6 +1360,7 @@
     <Content Include="img\logo.png" />
     <Content Include="img\mdb-favicon.ico" />
     <Content Include="img\offer-bg.png" />
+    <Content Include="img\OrderConfirmed.png" />
     <Content Include="img\product\feature-product\f-p-1.jpg" />
     <Content Include="img\product\feature-product\f-p-2.jpg" />
     <Content Include="img\product\feature-product\f-p-3.jpg" />
@@ -1638,6 +1619,8 @@
     <Content Include="Views\Shopping\ArrangeByCarBrand.cshtml" />
     <Content Include="Views\Shopping\ArrangeByCategory.cshtml" />
     <Content Include="Views\Shopping\ArrangeByName.cshtml" />
+    <Content Include="Views\OrderManaging\CreateCustomer.cshtml" />
+    <Content Include="Views\OrderManaging\EditCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1659,23 +1642,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202208060716039_asd.resx">
-      <DependentUpon>202208060716039_asd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208061132548_sec.resx">
-      <DependentUpon>202208061132548_sec.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208061445473_third.resx">
-      <DependentUpon>202208061445473_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208080344402_fourth.resx">
-      <DependentUpon>202208080344402_fourth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208080409013_fifth.resx">
-      <DependentUpon>202208080409013_fifth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208100353308_sixth.resx">
-      <DependentUpon>202208100353308_sixth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202208130301076_first.resx">
+      <DependentUpon>202208130301076_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

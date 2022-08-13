@@ -7,13 +7,13 @@ namespace AutoPart.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class sixth : IMigrationMetadata
+    public sealed partial class first : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(sixth));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(first));
         
         string IMigrationMetadata.Id
         {
-            get { return "202208100353308_sixth"; }
+            get { return "202208130301076_first"; }
         }
         
         string IMigrationMetadata.Source

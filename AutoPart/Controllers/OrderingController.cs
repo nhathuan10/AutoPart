@@ -135,6 +135,7 @@ namespace AutoPart.Controllers
     public class OrderingController : Controller
     {
         private MyContext db = new MyContext();
+
         [ValidateInput(false)]
         public ActionResult AddToCart(string partId, string partName, string description, string condition, string image, float price, int quantity)
         {
@@ -148,10 +149,12 @@ namespace AutoPart.Controllers
             Session["cart"] = cart;
             return RedirectToAction("YourCart");
         }
+
         public ActionResult YourCart()
         {
             return View();
         }
+
         public ActionResult RemoveItem(int id)
         {
             ShoppingCart cart = (ShoppingCart)Session["cart"];
@@ -162,6 +165,7 @@ namespace AutoPart.Controllers
             cart.RemoveItem(id.ToString());
             return RedirectToAction("YourCart");
         }
+
         public ActionResult ChangeQuantity(string partId, string value)
         {
             ShoppingCart cart = (ShoppingCart)Session["cart"];
@@ -180,34 +184,23 @@ namespace AutoPart.Controllers
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string userName = currentUser.Email;
-            string userId = currentUser.Id;
-            ViewBag.UserName = userName;
-            ViewBag.UserId = userId;
+            var customers = db.Customers.Where(c => c.Email == userName).ToList();
             ViewBag.Sum = sum;
-            return View();
+            return View(customers);
         }
 
-        [HttpPost]
-        public ActionResult PlaceOrder([Bind(Include = "Id,Account,Name,Address,City,State,Email,Phone")] Customer customer, float sum)
+        public ActionResult CheckOut(int id, float sum)
         {
-            if (ModelState.IsValid)
-            {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("PlaceOrderConfirmed", new { sum = sum });
-            }
-            return View(customer);
+            return RedirectToAction("PlaceOrderConfirmed", new { sum = sum, id = id });
         }
-        public ActionResult PlaceOrderConfirmed(float sum)
+
+        public ActionResult PlaceOrderConfirmed(int id, float sum)
         {
             var cart = (ShoppingCart)Session["cart"];
             if (cart != null)
             {
                 var items = cart.CartItems;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-                var customer = db.Customers.Where(c => c.Account == currentUser.Id).ToList().LastOrDefault();
+                var customer = db.Customers.Where(c => c.Id == id).FirstOrDefault();
                 Order order = new Order();
                 order.CustomerId = customer.Id;
                 order.OrderDate = DateTime.Today;

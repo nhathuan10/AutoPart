@@ -48,7 +48,7 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Home/Index">Home</a>
+                        <a class="nav-link" aria-current="page" href="/Home/Index">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Shopping/Index">Products</a>
@@ -60,32 +60,44 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/Contact">Contact</a>
                     </li>
+                    @if (User.IsInRole("user"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OrderManaging/Index">Order Management</a>
+                        </li>
+                    }
                 </ul>
                 @*login partial*@
-                <div style="color: white">
-                    @using Microsoft.AspNet.Identity
-                    @if (Request.IsAuthenticated)
+            <div style="color: white" class="d-flex">
+                @if (User.IsInRole("user"))
+                {
+                    <a href="/Ordering/YourCart" class="text-light">
+                        <i style='font-size:22px' class='fas me-2'>&#xf218;</i>
+                    </a>
+                }
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "color: white" }))
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "color: white"}))
-                        {
-                            @Html.AntiForgeryToken()
+                        @Html.AntiForgeryToken()
 
-                            <ul class="nav navbar-nav navbar-right text-light">
-                                <li>
-                                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="text-white me-2" })
-                                </li>
-                                <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color: white">Log off</a></li>
-                            </ul>
-                        }
-                    }
-                    else
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "text-white me-2" })</li>
-                            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "text-white" })</li>
+                        <ul class="nav navbar-nav navbar-right text-light">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "text-white me-2" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color: white">Log off</a></li>
                         </ul>
                     }
-                </div>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "text-white me-2" })</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "text-white" })</li>
+                    </ul>
+                }
+            </div>
                 <!-- Left links -->
             </div>
             <!-- Collapsible wrapper -->

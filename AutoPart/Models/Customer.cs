@@ -14,8 +14,8 @@ namespace AutoPart.Models
         /* [Key]
          [ForeignKey("ApplicationUser")]
          public string UserId { get; set; }*/
-        [Required(ErrorMessage = "Must not be empty")]
-        public string Account { get; set; }
+        /*[Required(ErrorMessage = "Must not be empty")]*/
+        /*public string Account { get; set; }*/
 
         [Display(Name = "Customer Name")]
         [Required(ErrorMessage = "Must not be empty")]
