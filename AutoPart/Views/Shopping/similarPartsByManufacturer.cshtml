@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/LayoutUser2.cshtml";
 }
 
-<h2>similarPartsByManufacturer</h2>
-
 <style>
     .sub-item:hover {
         border: 2px #202020 solid;
@@ -14,9 +12,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<h2>Details</h2>
-
 <div class="container bg-light bg-opacity-50" style="height: 150vh">
+    <h2 class="my-3">Similar Parts By Manufacturer</h2>
     <div class="row mt-4">
         <div class="col-md-5 d-flex flex-column justify-content-center align-items-center" style="background-color: #cccccc">
             <div class="bg-image hover-zoom rounded">
@@ -124,7 +121,12 @@
         @foreach (var item in ViewBag.SimilarPartsByManufacturer)
         {
             <div class="col-lg-3 col-md-4 col-sm-6 item mb-3 d-flex justify-content-center">
-                <a href="@Url.Action("Details", "Shopping", new {
+                <a href="@Url.Action("Compare", "Shopping", new {
+                            basePartId = Model.Id,
+                            basePartCarBrand = Model.CarBrand.CarBrandName,
+                            basePartCategory = Model.Category.Name,
+                            basePartManufacturer = Model.Manufacturer.Name,
+                            basePartSupplier = Model.Supplier.Name,
                             id = item.Id,
                             carBrand = item.CarBrand.CarBrandName,
                             category = item.Category.Name,

@@ -1305,6 +1305,8 @@
     <Content Include="img\breadcrumb\checkout-bg.jpg" />
     <Content Include="img\carousel-1.png" />
     <Content Include="img\carousel-2.png" />
+    <Content Include="img\carousel-3.png" />
+    <Content Include="img\carousel-5.png" />
     <Content Include="img\carousel-bg-1.jpg" />
     <Content Include="img\carousel-bg-2.jpg" />
     <Content Include="img\crs1.jpg" />
@@ -1531,6 +1533,9 @@
     <Content Include="Areas\Admin\Views\Messages\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\ViewOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\ViewOrderDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderDetails\ViewOrderDetailsByOrder.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

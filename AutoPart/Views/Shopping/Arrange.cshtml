@@ -53,6 +53,6 @@
         }
     </div>
     <div class="d-flex justify-content-center">
-        @Html.PagedListPager(Model, page => Url.Action("Arrange", new { page, arr = ViewBag.Action }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = "&Uacute;  Last>>" })
+        @Html.PagedListPager(Model, page => Url.Action("Arrange", new { page, arr = ViewBag.Action }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< First  ", LinkToPreviousPageFormat = "Previous  ", LinkToNextPageFormat = "Next", LinkToLastPageFormat = " Last>>" })
     </div>
 </div>

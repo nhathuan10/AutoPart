@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AutoPart.Models.Order>
+
+@{
+    ViewBag.Title = "ViewOrder";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>View Orders By Customer</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            <a href="/Admin/Customers/ViewOrderDetails?id=@item.Id" class="btn btn-secondary">View Order Details</a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit","Orders", new { id=item.Id }, null) |
+            @Html.ActionLink("Details", "Details", "Orders", new { id=item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", "Orders", new { id=item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>

@@ -28,7 +28,7 @@ namespace AutoPart.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
+            var orderDetail = db.OrderDetails.Include(p => p.Order).Include(o => o.Part).Where(od => od.Id == id).FirstOrDefault();
             if (orderDetail == null)
             {
                 return HttpNotFound();
@@ -122,6 +122,12 @@ namespace AutoPart.Areas.Admin.Controllers
             db.OrderDetails.Remove(orderDetail);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ViewOrderDetailsByOrder(int id)
+        {
+            var orderDetails = db.OrderDetails.Include(p => p.Order).Include(p => p.Part).Where(od => od.OrderId == id);
+            return View(orderDetails);
         }
 
         protected override void Dispose(bool disposing)

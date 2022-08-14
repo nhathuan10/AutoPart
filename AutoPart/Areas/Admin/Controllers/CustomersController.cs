@@ -115,6 +115,18 @@ namespace AutoPart.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ViewOrder(int id)
+        {
+            var orders = db.Orders.Include(p => p.Customer).Where(o => o.CustomerId == id).ToList();
+            return View(orders);
+        }
+
+        public ActionResult ViewOrderDetails(int id)
+        {
+            var orderDetails = db.OrderDetails.Include(p => p.Order).Include(p => p.Part).Where(od => od.OrderId == id).ToList();
+            return View(orderDetails);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
