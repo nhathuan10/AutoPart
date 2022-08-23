@@ -286,5 +286,14 @@ namespace AutoPart.Controllers
             ViewBag.Category = category;
             return View(basePart);
         }
+
+        public PartialViewResult PartialSearchBar()
+        {
+            var categories = db.Categories.ToList();
+            ViewBag.Categories = categories;
+            var carBrands = db.CarBrands.ToList();
+            ViewBag.CarBrands = carBrands;
+            return PartialView();
+        }
     }
 }

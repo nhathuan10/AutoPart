@@ -50,6 +50,27 @@
       <HintPath>..\packages\JetBrains.Annotations.2022.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.5.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.5.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.4.403061554\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.5.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.5.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.5.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.4.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -59,6 +80,11 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -203,6 +229,10 @@
     <Compile Include="Migrations\202208130301076_first.cs" />
     <Compile Include="Migrations\202208130301076_first.designer.cs">
       <DependentUpon>202208130301076_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208150411240_azure.cs" />
+    <Compile Include="Migrations\202208150411240_azure.designer.cs">
+      <DependentUpon>202208150411240_azure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1536,6 +1566,7 @@
     <Content Include="Areas\Admin\Views\Customers\ViewOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\ViewOrderDetails.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\ViewOrderDetailsByOrder.cshtml" />
+    <None Include="Properties\PublishProfiles\autopart - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1596,8 +1627,6 @@
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
-    <Content Include="Views\Shopping\Create.cshtml" />
-    <Content Include="Views\Shopping\Delete.cshtml" />
     <Content Include="Views\Shopping\Details.cshtml" />
     <Content Include="Views\Shopping\Edit.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
@@ -1608,7 +1637,6 @@
     <Content Include="Views\Shopping\FilterByCarBrand.cshtml" />
     <Content Include="Views\Shopping\FilterByCategory.cshtml" />
     <Content Include="Views\Shopping\SearchByName.cshtml" />
-    <Content Include="Views\Shared\_PartialSearchBarList.cshtml" />
     <Content Include="Views\Shopping\Arrange.cshtml" />
     <Content Include="Views\Shopping\Compare.cshtml" />
     <Content Include="Views\Ordering\YourCart.cshtml" />
@@ -1626,6 +1654,7 @@
     <Content Include="Views\Shopping\ArrangeByName.cshtml" />
     <Content Include="Views\OrderManaging\CreateCustomer.cshtml" />
     <Content Include="Views\OrderManaging\EditCustomer.cshtml" />
+    <Content Include="Views\Shopping\PartialSearchBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1649,6 +1678,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202208130301076_first.resx">
       <DependentUpon>202208130301076_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208150411240_azure.resx">
+      <DependentUpon>202208150411240_azure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

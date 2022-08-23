@@ -10,7 +10,7 @@ using AutoPart.Models;
 
 namespace AutoPart.Areas.Admin.Controllers
 {
-    [Authorize(Roles ="admin")]
+    [Authorize(Roles = "Admin")]
     public class PartsController : Controller
     {
         private MyContext db = new MyContext();

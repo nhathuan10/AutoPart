@@ -25,7 +25,7 @@
 
 <div class="container">
     <h2>All Products</h2>
-    @Html.Partial("_PartialSearchBarList")
+    @Html.Action("PartialSearchBar")
     <div class="row">
         @foreach (var item in Model)
         {

@@ -59,7 +59,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Shopping/Index">Products</a>
                     </li>
-                    @if (User.IsInRole("user"))
+                    @if (User.IsInRole("User"))
                     {
                         <li class="nav-item">
                             <a class="nav-link" href="/OrderManaging/Index">Order Management</a>
@@ -68,7 +68,7 @@
                 </ul>
                 @*login partial*@
             <div style="color: white" class="d-flex">
-                @if (User.IsInRole("user"))
+                @if (User.IsInRole("User"))
                 {
                     <a href="/Ordering/YourCart" class="text-light">
                         <i style='font-size:22px' class='fas me-2'>&#xf218;</i>

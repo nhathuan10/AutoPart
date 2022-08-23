@@ -177,7 +177,7 @@ namespace AutoPart.Controllers
             return RedirectToAction("YourCart");
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         public ActionResult PlaceOrder(float sum)
         {
             ApplicationDbContext context = new ApplicationDbContext();

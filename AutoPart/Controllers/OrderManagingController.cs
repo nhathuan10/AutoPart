@@ -16,7 +16,7 @@ namespace AutoPart.Controllers
     {
         private MyContext db = new MyContext();
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         public ActionResult Index()
         {
             ApplicationDbContext context = new ApplicationDbContext();

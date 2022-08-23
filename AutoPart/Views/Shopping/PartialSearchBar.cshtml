@@ -1,4 +1,5 @@
-﻿<div class="d-flex align-items-center justify-content-between">
+﻿
+<div class="d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
         <div>
             <a href="/Shopping/Index" class="btn btn-dark me-2">All Products</a>
@@ -14,11 +15,10 @@
                     Filter By Car Brand
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=3">BMW</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=4">Mescedes-Benz</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=5">Audi</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=6">Lexus</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=7">Acura</a></li>
+                    @foreach (var item in ViewBag.CarBrands)
+                    {
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCarBrand?id=@item.Id">@item.CarBrandName</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -33,16 +33,10 @@
                     Filter By Category
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1003">Cabin Filter</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1004">Axle</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1005">Tyres</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1006">BrakePad</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1007">Ball Joint</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1008">Alternator</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1009">Head Light</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1010">Bumper Cover</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1012">Battery</a></li>
-                    <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=1013">Wheels</a></li>
+                    @foreach (var item in ViewBag.Categories)
+                    {
+                        <li><a class="dropdown-item" href="/Shopping/FilterByCategory?id=@item.Id">@item.Name</a></li>
+                    }
                 </ul>
             </div>
         </div>

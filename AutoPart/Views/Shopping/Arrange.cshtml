@@ -24,7 +24,7 @@
 }
 
 <div class="container">
-    @Html.Partial("_PartialSearchBarList")
+    @Html.Action("PartialSearchBar")
     <h2 class="mb-3">@ViewBag.ArrangeType</h2>
     <input value="@ViewBag.Action" type="hidden" />
     <div class="row">

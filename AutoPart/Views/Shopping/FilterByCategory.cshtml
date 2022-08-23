@@ -24,7 +24,7 @@
 }
 
 <div class="container">
-    @Html.Partial("_PartialSearchBarList")
+    @Html.Action("PartialSearchBar")
     <input type="hidden" value="@ViewBag.CategoryId" />
     <div class="d-flex align-items-center py-2 my-2 justify-content-between">
         <h2>@ViewBag.Category</h2>
