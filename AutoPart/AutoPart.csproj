@@ -1628,7 +1628,6 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\Shopping\Details.cshtml" />
-    <Content Include="Views\Shopping\Edit.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
     <Content Include="Views\Shared\LayoutUser2.cshtml" />
     <Content Include="Views\Shopping\similarPartsByManufacturer.cshtml" />
