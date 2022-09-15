@@ -29,7 +29,7 @@ namespace AutoPart.Models
         [Required(ErrorMessage = "Must not be empty")]
         public string City { get; set; }
 
-        [Display(Name = "State")]
+        [Display(Name = "Province")]
         [Required(ErrorMessage = "Must not be empty")]
         public string State { get; set; }
 
@@ -40,6 +40,8 @@ namespace AutoPart.Models
 
         [Display(Name = "Phone")]
         [Required(ErrorMessage = "Must not be empty")]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string Phone { get; set; }
         public ICollection<Order> Orders { get; set; }
         //public virtual ApplicationUser ApplicationUser { get; set; }

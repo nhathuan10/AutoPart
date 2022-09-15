@@ -39,6 +39,16 @@ namespace AutoPart.Controllers
             return View(orderDetails);
         }
 
+        public ActionResult CancelOrder(int id)
+        {
+            var order = db.Orders.Include(o => o.Customer).Where(o => o.Id == id).FirstOrDefault();
+            ViewBag.OrderId = id;
+            ViewBag.OrderCustomerName = order.Customer.Name;
+            db.Orders.Remove(order);
+            db.SaveChanges();
+            return View();
+        }
+
         public ActionResult CreateCustomer()
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -93,6 +103,14 @@ namespace AutoPart.Controllers
                 return RedirectToAction("Index");
             }
             return View(customer);
+        }
+
+        public ActionResult DeleteCustomer(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("index");
         }
     }
 }

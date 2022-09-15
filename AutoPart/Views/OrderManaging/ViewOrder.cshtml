@@ -23,8 +23,9 @@
                         <li class="list-group-item px-3"><span class="fw-bold">Phone: </span> @item.Customer.Phone</li>
                         <li class="list-group-item px-3"><span class="fw-bold">Order Date: </span> @item.OrderDate</li>
                         <li class="list-group-item px-3"><span class="fw-bold">Total Amount: </span> $@item.Amount</li>
-                        <li class="list-group-item px-3">
-                            @Html.ActionLink("View Order Detail", "ViewOrderDetail", new { id = item.Id, amount = item.Amount }, new { @class = "btn btn-secondary my-2" })
+                        <li class="list-group-item px-3 d-flex justify-content-around">
+                            @Html.ActionLink("Order Detail", "ViewOrderDetail", new { id = item.Id, amount = item.Amount }, new { @class = "btn btn-secondary my-2" })
+                            @Html.ActionLink("Cancel Order", "CancelOrder", new { id = item.Id }, new { @class = "btn btn-warning my-2" })
                         </li>
                     </ul>
                 </div>

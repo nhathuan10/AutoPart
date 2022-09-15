@@ -234,6 +234,10 @@
     <Compile Include="Migrations\202208150411240_azure.designer.cs">
       <DependentUpon>202208150411240_azure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209150415247_azure2.cs" />
+    <Compile Include="Migrations\202209150415247_azure2.designer.cs">
+      <DependentUpon>202209150415247_azure2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CarBrand.cs" />
@@ -1333,6 +1337,7 @@
     <Content Include="img\blog\post-img2.jpg" />
     <Content Include="img\blog\prev.jpg" />
     <Content Include="img\breadcrumb\checkout-bg.jpg" />
+    <Content Include="img\cancel.jpg" />
     <Content Include="img\carousel-1.png" />
     <Content Include="img\carousel-2.png" />
     <Content Include="img\carousel-3.png" />
@@ -1654,6 +1659,7 @@
     <Content Include="Views\OrderManaging\CreateCustomer.cshtml" />
     <Content Include="Views\OrderManaging\EditCustomer.cshtml" />
     <Content Include="Views\Shopping\PartialSearchBar.cshtml" />
+    <Content Include="Views\OrderManaging\CancelOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1680,6 +1686,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208150411240_azure.resx">
       <DependentUpon>202208150411240_azure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209150415247_azure2.resx">
+      <DependentUpon>202209150415247_azure2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
