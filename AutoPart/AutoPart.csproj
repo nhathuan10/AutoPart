@@ -1377,6 +1377,7 @@
     <Content Include="img\elements\success-radio.png" />
     <Content Include="img\elements\user1.png" />
     <Content Include="img\elements\user2.png" />
+    <Content Include="img\emptycart.png" />
     <Content Include="img\fevicon.png" />
     <Content Include="img\Front.jpg" />
     <Content Include="img\instagram\i1.jpg" />
@@ -1660,6 +1661,7 @@
     <Content Include="Views\OrderManaging\EditCustomer.cshtml" />
     <Content Include="Views\Shopping\PartialSearchBar.cshtml" />
     <Content Include="Views\OrderManaging\CancelOrder.cshtml" />
+    <Content Include="Views\Ordering\EmptyCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

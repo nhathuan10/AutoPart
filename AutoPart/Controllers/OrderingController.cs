@@ -200,6 +200,11 @@ namespace AutoPart.Controllers
             if (cart != null)
             {
                 var items = cart.CartItems;
+                if (items.Rows.Count == 0)
+                {
+                    Session["cart"] = null;
+                    return View("EmptyCart");
+                }
                 var customer = db.Customers.Where(c => c.Id == id).FirstOrDefault();
                 Order order = new Order();
                 order.CustomerId = customer.Id;
