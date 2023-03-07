@@ -13,7 +13,7 @@ namespace AutoPart.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202208130301076_first"; }
+            get { return "202303071530053_first"; }
         }
         
         string IMigrationMetadata.Source

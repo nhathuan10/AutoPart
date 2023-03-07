@@ -226,17 +226,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202208130301076_first.cs" />
-    <Compile Include="Migrations\202208130301076_first.designer.cs">
-      <DependentUpon>202208130301076_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202208150411240_azure.cs" />
-    <Compile Include="Migrations\202208150411240_azure.designer.cs">
-      <DependentUpon>202208150411240_azure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202209150415247_azure2.cs" />
-    <Compile Include="Migrations\202209150415247_azure2.designer.cs">
-      <DependentUpon>202209150415247_azure2.cs</DependentUpon>
+    <Compile Include="Migrations\202303071530053_first.cs" />
+    <Compile Include="Migrations\202303071530053_first.designer.cs">
+      <DependentUpon>202303071530053_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1683,14 +1675,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202208130301076_first.resx">
-      <DependentUpon>202208130301076_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202208150411240_azure.resx">
-      <DependentUpon>202208150411240_azure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202209150415247_azure2.resx">
-      <DependentUpon>202209150415247_azure2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303071530053_first.resx">
+      <DependentUpon>202303071530053_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

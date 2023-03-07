@@ -8,7 +8,7 @@ namespace AutoPart.Models
 {
     public class MyContext : DbContext
     {
-        public MyContext() : base("name=AzureConnection")
+        public MyContext() : base("name=DefaultConnection")
         {
         }
         public DbSet<CarBrand> CarBrands { get; set; }
